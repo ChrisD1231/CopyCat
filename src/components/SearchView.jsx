@@ -82,7 +82,7 @@ export default function SearchView() {
         </div>
         {!query && (
           <div style={{ display: 'flex', gap: 8, marginTop: 12, flexWrap: 'wrap' }}>
-            {['boat animation', 'green color', 'scrolling code', 'construction prompt', 'lighthouse email'].map(s => (
+            {['scrolling code', 'color palette', 'react component', 'sql query', 'terminal script'].map(s => (
               <button key={s} className="filter-chip" onClick={() => setQuery(s)}>
                 {s}
               </button>

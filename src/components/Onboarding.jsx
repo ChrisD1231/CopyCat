@@ -112,26 +112,26 @@ gsap.to(".logo", {
           <div className="demo-collections-grid">
             <div className="demo-col-card">
               <Icons.Folder style={{ width: 22, height: 22, color: '#6366f1' }} />
-              <div className="demo-col-name">Animation & Scroll</div>
-              <div className="demo-col-count">8 items</div>
+              <div className="demo-col-name">Code Snippets</div>
+              <div className="demo-col-count">24 items</div>
             </div>
 
             <div className="demo-col-card">
               <Icons.Folder style={{ width: 22, height: 22, color: '#67C7B5' }} />
-              <div className="demo-col-name">Boat Project Assets</div>
+              <div className="demo-col-name">Design & Colors</div>
               <div className="demo-col-count">18 items</div>
             </div>
 
             <div className="demo-col-card">
               <Icons.Folder style={{ width: 22, height: 22, color: '#ffd60a' }} />
-              <div className="demo-col-name">Lighthouse Contacts</div>
-              <div className="demo-col-count">14 items</div>
+              <div className="demo-col-name">Documentation Links</div>
+              <div className="demo-col-count">31 items</div>
             </div>
 
             <div className="demo-col-card">
               <Icons.Folder style={{ width: 22, height: 22, color: '#bf5af2' }} />
-              <div className="demo-col-name">AI Text Prompts</div>
-              <div className="demo-col-count">5 items</div>
+              <div className="demo-col-name">AI Prompts</div>
+              <div className="demo-col-count">12 items</div>
             </div>
           </div>
         </div>
