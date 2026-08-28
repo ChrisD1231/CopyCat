@@ -53,7 +53,7 @@ export default function RecentFeed() {
     try {
       if (!api) {
         // Demo mode fallback
-        setItems(getDemoItems());
+        setItems(getDemoItems(filter));
         return;
       }
       const data = filter === 'all'
@@ -62,22 +62,30 @@ export default function RecentFeed() {
       setItems(data || []);
     } catch (err) {
       console.error('Failed to load items:', err);
-      setItems(getDemoItems());
+      setItems(getDemoItems(filter));
     } finally {
       setLoading(false);
     }
   }
 
   async function handleSearch(q) {
-    if (!api) return;
     setLoading(true);
     try {
+      if (!api) {
+        const filtered = mockItems.filter(item => {
+          const text = (item.content + ' ' + item.title + ' ' + item.description + ' ' + (item.tags || []).join(' ')).toLowerCase();
+          return text.includes(q.toLowerCase());
+        });
+        setItems(filtered);
+        return;
+      }
       const results = await api.search(q);
       setItems(results || []);
     } finally {
       setLoading(false);
     }
   }
+
 
   async function handleCopy(item) {
     if (api) {
@@ -255,18 +263,10 @@ function groupByDate(items) {
   return groups;
 }
 
-function getDemoItems() {
-  return [
-    {
-      id: 'demo-1',
-      content: 'gsap.registerPlugin(ScrollTrigger);',
-      content_type: 'code',
-      title: 'JavaScript/GSAP',
-      description: 'GSAP ScrollTrigger animation code',
-      tags: ['javascript', 'gsap', 'animation'],
-      created_at: Date.now() - 1000 * 60 * 60 * 2,
-      is_favorite: false,
-      use_count: 3,
-    },
-  ];
+import { mockItems } from '../mockData';
+
+function getDemoItems(filter) {
+  if (filter === 'all') return mockItems;
+  return mockItems.filter(i => i.content_type === filter);
 }
+

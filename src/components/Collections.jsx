@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import ClipboardItem from './ClipboardItem.jsx';
+import { mockCollections } from '../mockData';
+
 
 const api = window.copycat;
 
@@ -191,25 +193,3 @@ function getTypeIcon(type) {
   return icons[type] || '📝';
 }
 
-const mockCollections = [
-  {
-    id: 'c1', name: 'Lighthouse Construction', icon: '🏗️', color: '#F59E0B', is_auto: true,
-    description: 'All memories from the Lighthouse Construction project', count: 14,
-    items: [{ id: 'i1', content_type: 'email', title: 'mike.thompson@lighthouse.com', content: 'mike.thompson@lighthouseconstruction.com', created_at: Date.now() - 1000*60*60*24*12 }]
-  },
-  {
-    id: 'c2', name: 'Boat Website', icon: '⛵', color: '#67C7B5', is_auto: true,
-    description: 'Wake boat brand website — design and code', count: 18,
-    items: [{ id: 'i2', content_type: 'code', title: 'GSAP ScrollTrigger', content: 'gsap.registerPlugin(ScrollTrigger)', created_at: Date.now() - 1000*60*60*24*21 }]
-  },
-  {
-    id: 'c3', name: 'Animation & Scroll', icon: '✨', color: '#6366F1', is_auto: true,
-    description: 'Scroll animation libraries, GSAP code, and motion design resources', count: 8,
-    items: []
-  },
-  {
-    id: 'c4', name: 'AI Prompts', icon: '🤖', color: '#0EA5E9', is_auto: true,
-    description: 'Saved prompts for AI tools', count: 5,
-    items: []
-  },
-];

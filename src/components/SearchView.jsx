@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import ClipboardItem from './ClipboardItem.jsx';
+import { mockItems } from '../mockData';
+
 
 const api = window.copycat;
 
@@ -20,16 +22,29 @@ export default function SearchView() {
     return () => clearTimeout(t);
   }, [query]);
 
+
   async function load(q) {
     setLoading(true);
     try {
-      if (!api) { setResults([]); return; }
+      if (!api) {
+        if (!q.trim()) {
+          setResults(mockItems.slice(0, 30));
+          return;
+        }
+        const filtered = mockItems.filter(item => {
+          const text = (item.content + ' ' + item.title + ' ' + item.description + ' ' + (item.tags || []).join(' ')).toLowerCase();
+          return text.includes(q.toLowerCase());
+        });
+        setResults(filtered);
+        return;
+      }
       const data = q.trim() ? await api.search(q) : await api.getRecent(30);
       setResults(data || []);
     } finally {
       setLoading(false);
     }
   }
+
 
   async function handleCopy(item) {
     if (api) await api.copyItem(item.id);
