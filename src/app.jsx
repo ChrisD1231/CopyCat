@@ -69,6 +69,7 @@ export default function App() {
 
   return (
     <div className="app-shell">
+      <div className="window-drag-handle" />
       {/* Sidebar */}
       <aside className="sidebar">
         <div className="sidebar-logo">

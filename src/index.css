@@ -1367,4 +1367,36 @@ input, select {
   color: var(--text-secondary);
 }
 
+/* ─── Frameless Window Titlebar (Modern look) ───────────── */
+.window-drag-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  -webkit-app-region: drag;
+  z-index: 999999;
+}
+
+/* Push headers down on Windows/Mac to clear native window controls */
+.sidebar {
+  padding-top: 36px !important;
+}
+
+.content-header {
+  padding-top: 36px !important;
+}
+
+/* Exclude interactive elements from drag behavior */
+.sidebar-logo,
+.sidebar-nav,
+.nav-item,
+.content-title,
+.search-container,
+.landing-header,
+.landing-nav-btn {
+  -webkit-app-region: no-drag;
+}
+
+
 

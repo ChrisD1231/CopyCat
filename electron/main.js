@@ -43,8 +43,12 @@ function createMainWindow() {
     minWidth: 800,
     minHeight: 600,
     backgroundColor: '#0a0a0f',
-    titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'default',
-    frame: process.platform !== 'darwin',
+    titleBarStyle: 'hidden',
+    titleBarOverlay: process.platform === 'win32' ? {
+      color: '#08080a',
+      symbolColor: '#8a8a93',
+      height: 36
+    } : false,
     show: false,
     icon: getAppIcon(),
     webPreferences: {
