@@ -87,7 +87,7 @@ export default function App() {
             >
               <span className="nav-icon">{item.icon}</span>
               <span className="nav-label">{item.label}</span>
-              {item.shortcut && <span className="nav-shortcut">{item.shortcut}</span>}
+              {item.shortcut && <span className="kbd">{item.shortcut}</span>}
             </button>
           ))}
         </nav>

@@ -138,6 +138,9 @@ export default function RecentFeed() {
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
           />
+          {!searchQuery && (
+            <span className="kbd" style={{ fontSize: 9 }}>Ctrl+F</span>
+          )}
           {searchQuery && (
             <button
               style={{ color: 'var(--text-tertiary)', fontSize: 12, padding: '2px 6px', cursor: 'pointer' }}
