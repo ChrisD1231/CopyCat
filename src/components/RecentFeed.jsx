@@ -1,18 +1,20 @@
 import { useState, useEffect, useRef } from 'react';
 import ClipboardItem from './ClipboardItem.jsx';
+import { Icons } from './Icons.jsx';
 
 const api = window.copycat;
 
+
 const FILTERS = [
-  { id: 'all',     label: 'All',      icon: '⬛' },
-  { id: 'text',    label: 'Text',     icon: '📝' },
-  { id: 'url',     label: 'Links',    icon: '🔗' },
-  { id: 'code',    label: 'Code',     icon: '💻' },
-  { id: 'image',   label: 'Images',   icon: '🖼' },
-  { id: 'color',   label: 'Colors',   icon: '🎨' },
-  { id: 'email',   label: 'Email',    icon: '✉️' },
-  { id: 'phone',   label: 'Phone',    icon: '📱' },
-  { id: 'prompt',  label: 'Prompts',  icon: '🤖' },
+  { id: 'all',     label: 'All',      icon: <Icons.Logo style={{ width: 12, height: 12 }} /> },
+  { id: 'text',    label: 'Text',     icon: <Icons.Text style={{ width: 12, height: 12 }} /> },
+  { id: 'url',     label: 'Links',    icon: <Icons.Link style={{ width: 12, height: 12 }} /> },
+  { id: 'code',    label: 'Code',     icon: <Icons.Code style={{ width: 12, height: 12 }} /> },
+  { id: 'image',   label: 'Images',   icon: <Icons.Image style={{ width: 12, height: 12 }} /> },
+  { id: 'color',   label: 'Colors',   icon: <Icons.Color style={{ width: 12, height: 12 }} /> },
+  { id: 'email',   label: 'Email',    icon: <Icons.Email style={{ width: 12, height: 12 }} /> },
+  { id: 'phone',   label: 'Phone',    icon: <Icons.Phone style={{ width: 12, height: 12 }} /> },
+  { id: 'prompt',  label: 'Prompts',  icon: <Icons.Prompt style={{ width: 12, height: 12 }} /> },
 ];
 
 export default function RecentFeed() {
@@ -128,7 +130,7 @@ export default function RecentFeed() {
       {/* Search */}
       <div className="search-container">
         <div className="search-input-wrap">
-          <span className="search-icon">🔍</span>
+          <span className="search-icon"><Icons.Search style={{ width: 14, height: 14 }} /></span>
           <input
             ref={searchRef}
             id="recent-search"
@@ -173,7 +175,7 @@ export default function RecentFeed() {
           </div>
         ) : items.length === 0 ? (
           <div className="empty-state">
-            <div className="empty-icon">📋</div>
+            <div className="empty-icon"><Icons.Logo style={{ width: 40, height: 40, color: 'var(--text-tertiary)' }} /></div>
             <div className="empty-title">
               {searchQuery ? 'No results found' : 'Nothing copied yet'}
             </div>

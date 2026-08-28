@@ -6,14 +6,16 @@ import Favorites from './components/Favorites.jsx';
 import Settings from './components/Settings.jsx';
 import SearchView from './components/SearchView.jsx';
 
+import { Icons } from './components/Icons.jsx';
+
 const api = window.copycat;
 
 const NAV_ITEMS = [
-  { id: 'search',      label: 'Search',      icon: '🔍', shortcut: '⌘K' },
-  { id: 'recent',      label: 'Recent',      icon: '🕐', shortcut: null  },
-  { id: 'collections', label: 'Collections', icon: '🗂', shortcut: null  },
-  { id: 'favorites',   label: 'Favorites',   icon: '⭐', shortcut: null  },
-  { id: 'settings',    label: 'Settings',    icon: '⚙️', shortcut: null  },
+  { id: 'search',      label: 'Search',      icon: <Icons.Search />, shortcut: 'Ctrl+F' },
+  { id: 'recent',      label: 'Recent',      icon: <Icons.Clock />, shortcut: null  },
+  { id: 'collections', label: 'Collections', icon: <Icons.Folder />, shortcut: null  },
+  { id: 'favorites',   label: 'Favorites',   icon: <Icons.Star />, shortcut: null  },
+  { id: 'settings',    label: 'Settings',    icon: <Icons.Settings />, shortcut: null  },
 ];
 
 export default function App() {
@@ -70,7 +72,7 @@ export default function App() {
       {/* Sidebar */}
       <aside className="sidebar">
         <div className="sidebar-logo">
-          <div className="logo-mark">🐱</div>
+          <div className="logo-mark"><Icons.Logo style={{ width: 14, height: 14 }} /></div>
           <div>
             <div className="logo-text">Copycat</div>
             <div className="logo-tagline">Copy it once. Find it forever.</div>

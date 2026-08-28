@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import ClipboardItem from './ClipboardItem.jsx';
+import { Icons } from './Icons.jsx';
+
 
 const api = window.copycat;
 
@@ -45,7 +47,7 @@ export default function Favorites() {
           <div className="empty-state"><div style={{ color: 'var(--text-tertiary)' }}>Loading...</div></div>
         ) : items.length === 0 ? (
           <div className="empty-state">
-            <div className="empty-icon">⭐</div>
+            <div className="empty-icon"><Icons.Star style={{ width: 32, height: 32, opacity: 0.3 }} /></div>
             <div className="empty-title">No favorites yet</div>
             <div className="empty-desc">Star important clipboard memories to find them here quickly.</div>
           </div>

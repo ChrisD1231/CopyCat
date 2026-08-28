@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import ClipboardItem from './ClipboardItem.jsx';
 import { mockItems } from '../mockData';
+import { Icons } from './Icons.jsx';
+
 
 
 const api = window.copycat;
@@ -62,7 +64,7 @@ export default function SearchView() {
       </div>
       <div className="search-container">
         <div className="search-input-wrap">
-          <span className="search-icon">🔍</span>
+          <span className="search-icon"><Icons.Search style={{ width: 14, height: 14 }} /></span>
           <input
             ref={inputRef}
             id="main-search-input"
@@ -96,7 +98,7 @@ export default function SearchView() {
         )}
         {results.length === 0 && !loading && query ? (
           <div className="empty-state">
-            <div className="empty-icon">🔍</div>
+            <div className="empty-icon"><Icons.Search style={{ width: 32, height: 32, opacity: 0.3 }} /></div>
             <div className="empty-title">No results</div>
             <div className="empty-desc">Try different words — semantic search finds related content even without exact matches.</div>
           </div>

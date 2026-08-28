@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { Icons } from './Icons.jsx';
+
 
 const api = window.copycat;
 
@@ -62,7 +64,7 @@ export default function Settings({ monitorStatus, setMonitorStatus }) {
         <div className="settings-container">
           {/* Privacy Banner */}
           <div className="privacy-banner">
-            <span className="privacy-icon">🔒</span>
+            <span className="privacy-icon"><Icons.Shield style={{ width: 14, height: 14 }} /></span>
             <div className="privacy-text">
               <strong>Private by default.</strong> All clipboard data stays on your device. 
               Nothing is sent to any server or cloud service.
@@ -205,7 +207,7 @@ export default function Settings({ monitorStatus, setMonitorStatus }) {
                 </div>
                 <div className="settings-description">
                   {confirmClear
-                    ? '⚠️ This cannot be undone. Click again to confirm.'
+                    ? 'This cannot be undone. Click again to confirm.'
                     : 'Permanently delete your entire clipboard history'
                   }
                 </div>
@@ -216,7 +218,7 @@ export default function Settings({ monitorStatus, setMonitorStatus }) {
                 style={{ fontSize: 11 }}
                 onClick={handleClearAll}
               >
-                {confirmClear ? '⚠️ Confirm Delete' : 'Delete All'}
+                {confirmClear ? 'Confirm Delete' : 'Delete All'}
               </button>
             </div>
           </div>
@@ -234,9 +236,9 @@ export default function Settings({ monitorStatus, setMonitorStatus }) {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: 22,
+                  color: 'white',
                 }}>
-                  🐱
+                  <Icons.Logo style={{ width: 22, height: 22 }} />
                 </div>
                 <div>
                   <div style={{ fontWeight: 600, fontSize: 14 }}>Copycat</div>

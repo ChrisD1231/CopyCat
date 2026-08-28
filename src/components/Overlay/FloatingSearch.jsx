@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { getTypeMeta, formatDate } from '../ClipboardItem.jsx';
+import { Icons } from '../Icons.jsx';
+
 
 const api = window.copycat;
 
@@ -149,7 +151,7 @@ export default function FloatingSearch() {
       >
         {/* Header / Search */}
         <div className="overlay-header">
-          <div className="overlay-logo">🐱</div>
+          <div className="overlay-logo"><Icons.Logo style={{ width: 14, height: 14 }} /></div>
           <input
             ref={inputRef}
             id="overlay-search-input"
@@ -170,7 +172,7 @@ export default function FloatingSearch() {
         <div className="overlay-results" ref={listRef}>
           {results.length === 0 && query ? (
             <div className="no-results">
-              <div className="no-results-icon">🔍</div>
+              <div className="no-results-icon"><Icons.Search style={{ width: 28, height: 28, opacity: 0.3 }} /></div>
               <div style={{ fontSize: 13, color: 'var(--text-tertiary)' }}>
                 No results for "{query}"
               </div>

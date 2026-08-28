@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import ClipboardItem from './ClipboardItem.jsx';
 import { mockCollections } from '../mockData';
+import { Icons } from './Icons.jsx';
+
 
 
 const api = window.copycat;
@@ -56,8 +58,8 @@ export default function Collections() {
                 ← Collections
               </button>
             </div>
-            <h1 className="content-title">
-              {selected.icon} {selected.name}
+            <h1 className="content-title" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <Icons.Folder style={{ width: 16, height: 16, color: selected.color }} /> {selected.name}
             </h1>
             <div className="content-subtitle">{selected.count || selected.items?.length || 0} memories</div>
           </div>
@@ -126,7 +128,7 @@ export default function Collections() {
           </div>
         ) : collections.length === 0 ? (
           <div className="empty-state">
-            <div className="empty-icon">🗂</div>
+            <div className="empty-icon"><Icons.Folder style={{ width: 40, height: 40, color: 'var(--text-tertiary)' }} /></div>
             <div className="empty-title">No collections yet</div>
             <div className="empty-desc">
               Copycat automatically groups related clipboard items. Copy a few things and check back!
@@ -170,8 +172,8 @@ export default function Collections() {
 function CollectionCard({ col, onClick }) {
   return (
     <div className="collection-card" onClick={onClick} id={`collection-${col.id}`}>
-      <div className="collection-accent-bar" style={{ background: col.color || 'var(--accent-indigo)' }} />
-      <div className="collection-icon">{col.icon}</div>
+      <div className="collection-accent-bar" style={{ background: col.color || 'var(--accent)' }} />
+      <div className="collection-icon"><Icons.Folder style={{ width: 18, height: 18, color: col.color }} /></div>
       <div className="collection-name">{col.name}</div>
       <div className="collection-count">{col.count || col.items?.length || 0} memories</div>
       <div className="collection-description">{col.description}</div>
@@ -179,7 +181,7 @@ function CollectionCard({ col, onClick }) {
         <div className="collection-preview">
           {col.items.slice(0, 4).map(item => (
             <span key={item.id} className="preview-chip">
-              {getTypeIcon(item.content_type)} {(item.title || item.content || '').substring(0, 20)}
+              {getTypeText(item.content_type)}: {(item.title || item.content || '').substring(0, 20)}
             </span>
           ))}
         </div>
@@ -188,8 +190,8 @@ function CollectionCard({ col, onClick }) {
   );
 }
 
-function getTypeIcon(type) {
-  const icons = { code: '💻', url: '🔗', color: '🎨', email: '✉️', phone: '📱', prompt: '🤖', text: '📝', image: '🖼️' };
-  return icons[type] || '📝';
+function getTypeText(type) {
+  const labels = { code: 'Code', url: 'Link', color: 'Color', email: 'Email', phone: 'Phone', prompt: 'Prompt', text: 'Text', image: 'Image' };
+  return labels[type] || 'Text';
 }
 

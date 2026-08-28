@@ -1,15 +1,16 @@
 import { useState } from 'react';
+import { Icons } from './Icons.jsx';
 
 const TYPE_META = {
-  code:    { icon: '💻', color: 'var(--type-code)',    label: 'Code'    },
-  url:     { icon: '🔗', color: 'var(--type-url)',     label: 'Link'    },
-  color:   { icon: '🎨', color: 'var(--type-color)',   label: 'Color'   },
-  email:   { icon: '✉️', color: 'var(--type-email)',   label: 'Email'   },
-  phone:   { icon: '📱', color: 'var(--type-phone)',   label: 'Phone'   },
-  image:   { icon: '🖼️', color: 'var(--type-image)',   label: 'Image'   },
-  prompt:  { icon: '🤖', color: 'var(--type-prompt)',  label: 'Prompt'  },
-  address: { icon: '📍', color: 'var(--type-address)', label: 'Address' },
-  text:    { icon: '📝', color: 'var(--type-text)',    label: 'Text'    },
+  code:    { icon: <Icons.Code />, color: 'var(--type-code)',    label: 'Code'    },
+  url:     { icon: <Icons.Link />, color: 'var(--type-url)',     label: 'Link'    },
+  color:   { icon: <Icons.Color />, color: 'var(--type-color)',   label: 'Color'   },
+  email:   { icon: <Icons.Email />, color: 'var(--type-email)',   label: 'Email'   },
+  phone:   { icon: <Icons.Phone />, color: 'var(--type-phone)',   label: 'Phone'   },
+  image:   { icon: <Icons.Image />, color: 'var(--type-image)',   label: 'Image'   },
+  prompt:  { icon: <Icons.Prompt />, color: 'var(--type-prompt)',  label: 'Prompt'  },
+  address: { icon: <Icons.Address />, color: 'var(--type-address)', label: 'Address' },
+  text:    { icon: <Icons.Text />, color: 'var(--type-text)',    label: 'Text'    },
 };
 
 function getTypeMeta(type) {
@@ -150,14 +151,14 @@ export default function ClipboardItem({ item, onCopy, onFavorite, onDelete, isCo
               title={item.is_favorite ? 'Remove from favorites' : 'Add to favorites'}
               onClick={e => { e.stopPropagation(); onFavorite(); }}
             >
-              {item.is_favorite ? '★' : '☆'}
+              <Icons.Star filled={item.is_favorite} style={{ width: 13, height: 13 }} />
             </button>
             <button
               className="action-btn copy"
               title="Copy to clipboard"
               onClick={e => { e.stopPropagation(); onCopy(); }}
             >
-              ⧉
+              <Icons.Copy style={{ width: 13, height: 13 }} />
             </button>
             <button
               className="action-btn"
@@ -165,7 +166,7 @@ export default function ClipboardItem({ item, onCopy, onFavorite, onDelete, isCo
               style={{ color: 'var(--text-tertiary)' }}
               onClick={e => { e.stopPropagation(); onDelete(); }}
             >
-              ✕
+              <Icons.Trash style={{ width: 13, height: 13 }} />
             </button>
           </>
         )}
