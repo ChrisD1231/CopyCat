@@ -202,7 +202,7 @@ function insertItem(item) {
       [Date.now(), existing.id]
     );
     saveDatabase();
-    return null;
+    return getItem(existing.id);
   }
 
   runQuery(`
