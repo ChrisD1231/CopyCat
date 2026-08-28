@@ -200,6 +200,20 @@ export default function Settings({ monitorStatus, setMonitorStatus }) {
               </button>
             </div>
 
+            <div className="settings-row">
+              <div>
+                <div className="settings-label">App onboarding tour</div>
+                <div className="settings-description">Replay the onboarding welcome screens</div>
+              </div>
+              <button className="btn btn-ghost" style={{ fontSize: 11 }}
+                onClick={() => {
+                  localStorage.removeItem('copycat-onboarded');
+                  window.location.reload();
+                }}>
+                Replay Tour
+              </button>
+            </div>
+
             <div className="settings-row" style={{ paddingTop: 16 }}>
               <div>
                 <div className="settings-label" style={{ color: 'var(--accent-red)' }}>
