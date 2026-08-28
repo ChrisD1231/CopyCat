@@ -29,6 +29,12 @@
   "build": {
     "appId": "com.copycat.app",
     "productName": "Copycat",
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json",
+      "assets/**/*"
+    ],
     "directories": {
       "output": "dist-electron"
     },
