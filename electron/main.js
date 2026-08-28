@@ -160,8 +160,12 @@ function toggleOverlay() {
 // ─── Global Shortcut ─────────────────────────────────────────────────────────
 
 function registerGlobalShortcut() {
-  const { getSetting } = require('./database');
-  const shortcut = getSetting('shortcut') || 'Alt+C';
+  const { getSetting, setSetting } = require('./database');
+  let shortcut = getSetting('shortcut');
+  if (!shortcut || shortcut === 'CommandOrControl+Shift+V' || shortcut === 'Ctrl+Shift+V') {
+    shortcut = 'Alt+C';
+    setSetting('shortcut', 'Alt+C');
+  }
   const registered = globalShortcut.register(shortcut, toggleOverlay);
   
   if (!registered) {
