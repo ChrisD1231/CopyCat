@@ -918,3 +918,189 @@ input, select {
   border-radius: 50%;
   background: var(--accent-green);
 }
+
+/* ─── Onboarding (Aceternity UI style) ──────────────────── */
+.onboarding {
+  position: fixed;
+  inset: 0;
+  background: #020203;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.onboarding-card {
+  width: 480px;
+  text-align: center;
+  background: rgba(10, 10, 12, 0.6);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xl);
+  padding: 36px;
+  box-shadow: var(--shadow-popup);
+}
+
+.onboarding-logo {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin: 0 auto 24px;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.35);
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.onboarding-step {
+  animation: fadeSlideUp 0.4s var(--ease-out) both;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.onboarding-eyebrow {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+  filter: drop-shadow(0 0 4px var(--accent-glow));
+}
+
+.onboarding-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.onboarding-title em {
+  font-style: normal;
+  background: linear-gradient(135deg, #818cf8 0%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.onboarding-subtitle {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.onboarding-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: white;
+  padding: 10px 24px;
+  border-radius: var(--radius-md);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.1s, box-shadow 0.1s;
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.25);
+}
+
+.onboarding-cta:hover {
+  background: #4747e0;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+}
+
+.onboarding-progress {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.progress-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--border-strong);
+  transition: all 0.15s;
+}
+
+.progress-dot.active {
+  width: 14px;
+  border-radius: 3px;
+  background: var(--accent);
+}
+
+.shortcut-display {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.shortcut-key {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(180deg, #1c1c1f 0%, #121214 100%);
+  border: 1px solid #28282c;
+  border-bottom: 3px solid #0a0a0c;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  animation: keyPop 0.3s var(--ease-out) both;
+}
+
+@keyframes keyPop {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.flying-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: 16px 0;
+  max-width: 380px;
+}
+
+.flying-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  animation: flyIn 0.3s var(--ease-out) both;
+}
+
+@keyframes flyIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
