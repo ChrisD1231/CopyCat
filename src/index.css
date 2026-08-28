@@ -1,65 +1,66 @@
 /* ═══════════════════════════════════════════════════════════
    COPYCAT — Redesigned Premium UI Theme
-   Style Pivot: Aceternity UI Minimal Neon Glow Grid
-═══════════════════════════════════════════════════════════ */
+   Style Pivot: Shadcn UI Premium Dark Theme
+   Quality Benchmark: https://github.com/shadcn-ui/ui
+   Color Palette: Zinc (Zinc-950/900/800/400)
+ ═══════════════════════════════════════════════════════════ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* ─── Custom Design System Tokens ───────────────────────── */
+/* ─── Custom Design System Tokens (Shadcn Zinc Theme) ───── */
 :root {
   /* Depth Layering Backgrounds */
-  --bg-app: #030303;       /* Deep obsidian black */
-  --bg-panel: #08080a;     /* Obsidian gray panels */
-  --bg-card: #0e0e11;      /* Spotlight card grids */
-  --bg-hover: #141417;     /* Soft slate hover hover states */
-  --bg-active: #191920;    /* Interactive focus lists */
+  --bg-app: #09090b;       /* Zinc-950 */
+  --bg-panel: #09090b;     /* Zinc-950 */
+  --bg-card: #18181b;      /* Zinc-900 */
+  --bg-hover: #27272a;     /* Zinc-800 */
+  --bg-active: #27272a;    /* Zinc-800 */
   
   /* Precision Thin Borders */
-  --border-subtle: rgba(255, 255, 255, 0.03);
-  --border-default: rgba(255, 255, 255, 0.06);
-  --border-strong: rgba(255, 255, 255, 0.12);
-  --border-focus: rgba(255, 255, 255, 0.22);
+  --border-subtle: #18181b;
+  --border-default: #27272a; /* Zinc-800 */
+  --border-strong: #3f3f46;  /* Zinc-700 */
+  --border-focus: #d4d4d8;   /* Zinc-300 */
   
   /* Text Contrast Hierarchy */
-  --text-primary: #f5f5f7;            /* Ice-white headers */
-  --text-secondary: #8e8e93;          /* Slate secondary text */
-  --text-tertiary: #545459;           /* Muted metadata */
-  --text-disabled: #38383a;           /* Inactive symbols */
+  --text-primary: #fafafa;            /* Zinc-50 */
+  --text-secondary: #a1a1aa;          /* Zinc-400 */
+  --text-tertiary: #71717a;           /* Zinc-500 */
+  --text-disabled: #3f3f46;           /* Zinc-700 */
 
-  /* Spotlight Neon Glow Accents */
-  --accent: #6366f1;                  /* Aceternity Neon Indigo */
-  --accent-glow: rgba(99, 102, 241, 0.25);
+  /* Accent Tints */
+  --accent: #fafafa;                  /* Muted White */
+  --accent-glow: rgba(255, 255, 255, 0.05);
   --accent-mint: #67c7b5;
-  --accent-amber: #e58a00;
-  --accent-green: #30d158;
-  --accent-red: #ff453a;
+  --accent-amber: #ffd60a;
+  --accent-green: #22c55e;
+  --accent-red: #ef4444;
   
   /* Desaturated category tints */
-  --type-code: #a1b0ff;
-  --type-url: #5ac8fa;
-  --type-color: #bf5af2;
-  --type-email: #64d2ff;
-  --type-phone: #ffd60a;
-  --type-text: #8e8e93;
-  --type-image: #ff64b0;
-  --type-prompt: #ff9f0a;
+  --type-code: #a1a1aa;
+  --type-url: #a1a1aa;
+  --type-color: #a1a1aa;
+  --type-email: #a1a1aa;
+  --type-phone: #a1a1aa;
+  --type-text: #a1a1aa;
+  --type-image: #a1a1aa;
+  --type-prompt: #a1a1aa;
 
   /* Typography Scales */
   --font-sans: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* Layout Radii */
+  /* Layout Radii (Shadcn standard 6px / 0.375rem) */
   --radius-sm: 4px;
   --radius-md: 6px;
   --radius-lg: 8px;
   --radius-xl: 12px;
   
   /* Shadows & Depth */
-  --shadow-popup: 0 16px 48px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.05);
-  --shadow-neon: 0 0 20px rgba(99, 102, 241, 0.12);
+  --shadow-popup: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px #27272a;
 }
 
-/* ─── Global Reset & Aceternity Dot Grid Background ─────── */
+/* ─── Global Reset & Clean Solid Background ─────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -70,12 +71,9 @@ html, body {
   height: 100%;
   width: 100%;
   background: var(--bg-app);
-  /* Aceternity Dot Matrix Pattern */
-  background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
-  background-size: 20px 20px;
   color: var(--text-primary);
   font-family: var(--font-sans);
-  font-size: 13px;
+  font-size: 13.5px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
@@ -102,15 +100,30 @@ input, select {
   border: none;
 }
 
-/* ─── Native Keycaps ────────────────────────────────────── */
+/* ─── Native Keycaps (Shadcn style) ─────────────────────── */
 .kbd {
-  font-size: 9.5px;
+  font-size: 10px;
   font-family: var(--font-mono);
   color: var(--text-secondary);
-  background: linear-gradient(180deg, #1c1c1f 0%, #121214 100%);
+  background: #18181b;
   border-radius: 4px;
-  border: 1px solid #28282c;
-  border-bottom: 2px solid #0a0a0c;
+  border: 1px solid #27272a;
+  padding: 1px 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  font-weight: 500;
+}
+
+/* ─── App Structure ─────────────────────────────────────── */
+.app-shell {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background: var(--bg-app);
+}er-bottom: 2px solid #0a0a0c;
   padding: 1px 4px;
   display: inline-flex;
   align-items: center;
