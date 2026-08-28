@@ -25,9 +25,9 @@ export default function App() {
   const [newItemFlash, setNewItemFlash] = useState(null);
 
   useEffect(() => {
-    // Check if first launch
+    // Check if first launch (only show landing page in browser preview)
     const hasOnboarded = localStorage.getItem('copycat-onboarded');
-    if (!hasOnboarded) {
+    if (!api && !hasOnboarded) {
       setShowOnboarding(true);
     }
 

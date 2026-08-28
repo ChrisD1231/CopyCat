@@ -151,29 +151,28 @@ export default function FloatingSearch() {
       >
         {/* Header / Search */}
         <div className="overlay-header">
-          <div className="overlay-logo"><Icons.Logo style={{ width: 14, height: 14 }} /></div>
+          <div className="overlay-back-icon">
+            <Icons.ArrowLeft style={{ width: 15, height: 15 }} />
+          </div>
           <input
             ref={inputRef}
             id="overlay-search-input"
             type="text"
             className="overlay-search"
-            placeholder="Search anything you've copied..."
+            placeholder="Search memories..."
             value={query}
             onChange={e => setQuery(e.target.value)}
             autoComplete="off"
             spellCheck={false}
           />
-          <div className="overlay-shortcut">
-            <span className="kbd">esc</span>
-          </div>
         </div>
 
         {/* Results */}
         <div className="overlay-results" ref={listRef}>
           {results.length === 0 && query ? (
             <div className="no-results">
-              <div className="no-results-icon"><Icons.Search style={{ width: 28, height: 28, opacity: 0.3 }} /></div>
-              <div style={{ fontSize: 13, color: 'var(--text-tertiary)' }}>
+              <div className="no-results-icon"><Icons.Search style={{ width: 24, height: 24, opacity: 0.3 }} /></div>
+              <div style={{ fontSize: 12, color: 'var(--text-tertiary)' }}>
                 No results for "{query}"
               </div>
             </div>
@@ -193,22 +192,19 @@ export default function FloatingSearch() {
 
         {/* Footer */}
         <div className="overlay-footer">
-          <div className="overlay-hints">
-            <span className="overlay-hint">
-              <span className="kbd">↑↓</span> Navigate
-            </span>
-            <span className="overlay-hint">
-              <span className="kbd">↵</span> Copy
-            </span>
-            <span className="overlay-hint">
-              <span className="kbd">esc</span> Close
-            </span>
+          <div className="overlay-footer-left">
+            <Icons.Logo style={{ width: 13, height: 13, color: 'var(--text-secondary)' }} />
+            <span className="overlay-footer-tag">Search memories</span>
           </div>
-          <div className="overlay-count">
-            {query
-              ? `${results.length} results`
-              : `${results.length} recent`
-            }
+          
+          <div className="overlay-footer-right">
+            <span className="overlay-hint">
+              Copy <span className="kbd">↵</span>
+            </span>
+            <span className="overlay-hint-separator">|</span>
+            <span className="overlay-hint">
+              Actions <span className="kbd">⌘</span> <span className="kbd">K</span>
+            </span>
           </div>
         </div>
       </div>

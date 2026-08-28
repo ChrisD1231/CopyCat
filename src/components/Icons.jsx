@@ -141,4 +141,10 @@ export const Icons = {
       <polyline points="12 5 19 12 12 19" />
     </svg>
   ),
+  ArrowLeft: (p) => (
+    <svg {...props} className={p.className} style={p.style}>
+      <line x1="19" y1="12" x2="5" y2="12" />
+      <polyline points="12 19 5 12 12 5" />
+    </svg>
+  ),
 };
