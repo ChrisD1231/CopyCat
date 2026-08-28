@@ -7,7 +7,7 @@ const api = window.copycat;
 export default function Settings({ monitorStatus, setMonitorStatus }) {
   const [settings, setSettings] = useState({
     captureEnabled: true,
-    shortcut: 'Ctrl+Shift+V',
+    shortcut: 'Alt+C',
     autoDelete: 'never',
     excludedApps: [],
     maxItems: 10000,
@@ -178,7 +178,7 @@ export default function Settings({ monitorStatus, setMonitorStatus }) {
                 <div className="settings-description">Global shortcut to open Copycat from anywhere</div>
               </div>
               <div style={{ display: 'flex', gap: 4 }}>
-                {['Ctrl', 'Shift', 'V'].map(k => (
+                {['Alt', 'C'].map(k => (
                   <span key={k} className="kbd" style={{ fontSize: 12, padding: '4px 8px' }}>{k}</span>
                 ))}
               </div>

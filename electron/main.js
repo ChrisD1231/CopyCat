@@ -160,7 +160,8 @@ function toggleOverlay() {
 // ─── Global Shortcut ─────────────────────────────────────────────────────────
 
 function registerGlobalShortcut() {
-  const shortcut = 'CommandOrControl+Shift+V';
+  const { getSetting } = require('./database');
+  const shortcut = getSetting('shortcut') || 'Alt+C';
   const registered = globalShortcut.register(shortcut, toggleOverlay);
   
   if (!registered) {
@@ -268,7 +269,7 @@ function setupIPC() {
   ipcMain.handle('get-settings', async () => {
     const { getSetting } = require('./database');
     return {
-      shortcut: getSetting('shortcut') || 'CommandOrControl+Shift+V',
+      shortcut: getSetting('shortcut') || 'Alt+C',
       pollInterval: parseInt(getSetting('pollInterval') || '500'),
       autoDelete: getSetting('autoDelete') || 'never',
       excludedApps: JSON.parse(getSetting('excludedApps') || '[]'),

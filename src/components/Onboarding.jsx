@@ -37,7 +37,7 @@ export default function Onboarding({ onComplete }) {
         <div className="shortcut-hint-wrap">
           <span style={{ color: 'var(--text-tertiary)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Global hotkey</span>
           <div className="shortcut-display">
-            {['Ctrl', 'Shift', 'V'].map(k => (
+            {['Alt', 'C'].map(k => (
               <span key={k} className="shortcut-key">{k}</span>
             ))}
           </div>
