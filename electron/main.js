@@ -55,8 +55,31 @@ function createMainWindow() {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false,
+      enableRemoteModule: false,
       sandbox: false,
+      webSecurity: true,
+      allowRunningInsecureContent: false,
+      devTools: isDev,
     },
+  });
+
+  // Security: Intercept external link opening to prevent in-app execution
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    if (url.startsWith('https:') || url.startsWith('http:')) {
+      shell.openExternal(url);
+    }
+    return { action: 'deny' };
+  });
+
+  // Security: Prevent unauthorized top-level navigation
+  mainWindow.webContents.on('will-navigate', (event, navigationUrl) => {
+    try {
+      const parsed = new URL(navigationUrl);
+      if (parsed.origin !== 'http://127.0.0.1:5173' && parsed.protocol !== 'file:') {
+        event.preventDefault();
+        shell.openExternal(navigationUrl);
+      }
+    } catch (e) {}
   });
 
   if (isDev) {
@@ -104,8 +127,19 @@ function createOverlayWindow() {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false,
+      enableRemoteModule: false,
       sandbox: false,
+      webSecurity: true,
+      allowRunningInsecureContent: false,
+      devTools: isDev,
     },
+  });
+
+  overlayWindow.webContents.setWindowOpenHandler(({ url }) => {
+    if (url.startsWith('https:') || url.startsWith('http:')) {
+      shell.openExternal(url);
+    }
+    return { action: 'deny' };
   });
 
   if (isDev) {

@@ -107,27 +107,37 @@ function processNewContent(content, hint) {
 }
 
 function isSensitive(content) {
-  // Basic sensitive content detection
-  const lower = content.toLowerCase();
-  
-  // Password patterns
-  if (/^password:\s*/i.test(content)) return true;
-  if (/^pin:\s*\d{4,8}$/i.test(content)) return true;
-  
-  // Private keys
-  if (/-----BEGIN (RSA |EC |DSA )?PRIVATE KEY-----/.test(content)) return true;
-  if (/-----BEGIN PGP PRIVATE KEY BLOCK-----/.test(content)) return true;
-  
-  // AWS/secret keys (basic pattern)
-  if (/(?:api[_-]?key|secret[_-]?key|private[_-]?key)\s*[:=]\s*\S{20,}/i.test(content)) return true;
-  
-  // SSH keys
-  if (/^ssh-(rsa|ed25519|ecdsa)\s+AAAA/.test(content)) return true;
-  
-  // Credit card numbers (basic Luhn-ish pattern)
-  const noSpaces = content.replace(/[\s-]/g, '');
-  if (/^\d{16}$/.test(noSpaces) && noSpaces.length === 16) return true;
-  
+  const skipSensitive = getSetting('skipSensitive') !== 'false';
+  if (!skipSensitive) return false;
+
+  if (typeof content !== 'string') return false;
+  const trimmed = content.trim();
+
+  // 1. Password and PIN keywords
+  if (/^(?:password|passwd|pwd|pin|secret|passphrase)\s*[:=]\s*\S+/i.test(trimmed)) return true;
+  if (/^pin:\s*\d{4,8}$/i.test(trimmed)) return true;
+
+  // 2. Cryptographic Private Keys & Certificates
+  if (/-----BEGIN (?:RSA |EC |DSA |OPENSSH |PGP )?PRIVATE KEY(?: BLOCK)?-----/i.test(trimmed)) return true;
+  if (/-----BEGIN CERTIFICATE-----/i.test(trimmed)) return true;
+
+  // 3. Cloud Provider & API Secret Keys
+  if (/AKIA[0-9A-Z]{16}/.test(trimmed)) return true; // AWS Access Key
+  if (/ghp_[0-9a-zA-Z]{36}|github_pat_[0-9a-zA-Z_]{22,}/.test(trimmed)) return true; // GitHub PAT
+  if (/sk_live_[0-9a-zA-Z]{24,}/.test(trimmed)) return true; // Stripe Live Secret Key
+  if (/sk-[a-zA-Z0-9]{32,}/.test(trimmed)) return true; // OpenAI Secret Key
+  if (/xox[baprs]-[0-9a-zA-Z]{10,48}/.test(trimmed)) return true; // Slack Token
+  if (/(?:api[_-]?key|secret[_-]?key|access[_-]?token|bearer[_-]?token)\s*[:=]\s*["']?[A-Za-z0-9_\-\.]{20,}["']?/i.test(trimmed)) return true;
+
+  // 4. Payment Cards (Visa, MasterCard, Amex, Discover with Luhn format check)
+  const noSpaces = trimmed.replace(/[\s-]/g, '');
+  if (/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\d{3})\d{11})$/.test(noSpaces)) {
+    return true;
+  }
+
+  // 5. Social Security Numbers (US SSN format)
+  if (/^\d{3}-\d{2}-\d{4}$/.test(trimmed)) return true;
+
   return false;
 }
 
