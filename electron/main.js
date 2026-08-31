@@ -49,7 +49,7 @@ function createMainWindow() {
       symbolColor: '#8a8a93',
       height: 36
     } : false,
-    show: false,
+    show: true,
     icon: getAppIcon(),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -60,13 +60,16 @@ function createMainWindow() {
   });
 
   if (isDev) {
-    mainWindow.loadURL('http://localhost:5173');
+    mainWindow.loadURL('http://127.0.0.1:5173');
   } else {
     mainWindow.loadFile(path.join(__dirname, '../dist/index.html'));
   }
 
   mainWindow.once('ready-to-show', () => {
+    mainWindow.setAlwaysOnTop(true);
     mainWindow.show();
+    mainWindow.focus();
+    mainWindow.setAlwaysOnTop(false);
   });
 
   mainWindow.on('closed', () => {
@@ -81,6 +84,8 @@ function createMainWindow() {
     }
   });
 }
+
+let lastShownTime = 0;
 
 function createOverlayWindow() {
   overlayWindow = new BrowserWindow({
@@ -104,7 +109,7 @@ function createOverlayWindow() {
   });
 
   if (isDev) {
-    overlayWindow.loadURL('http://localhost:5173/overlay.html');
+    overlayWindow.loadURL('http://127.0.0.1:5173/overlay.html');
   } else {
     overlayWindow.loadFile(path.join(__dirname, '../dist/overlay.html'));
   }
@@ -113,11 +118,16 @@ function createOverlayWindow() {
   overlayWindow.center();
 
   overlayWindow.on('blur', () => {
+    // Ignore blur events immediately after opening to prevent Windows Alt-key release focus loss
+    if (Date.now() - lastShownTime < 350) {
+      return;
+    }
     hideOverlay();
   });
 
   overlayWindow.on('closed', () => {
     overlayWindow = null;
+    isOverlayVisible = false;
   });
 }
 
@@ -136,15 +146,19 @@ function showOverlay() {
   if (!overlayWindow) {
     createOverlayWindow();
   }
+  lastShownTime = Date.now();
+  overlayWindow.setAlwaysOnTop(true, 'screen-saver');
   overlayWindow.center();
   overlayWindow.show();
   overlayWindow.focus();
   overlayWindow.webContents.send('overlay:focus');
   isOverlayVisible = true;
+  console.log('[Overlay] showOverlay triggered at', new Date().toISOString());
 }
 
 function hideOverlay() {
-  if (overlayWindow && isOverlayVisible) {
+  if (overlayWindow && overlayWindow.isVisible()) {
+    console.log('[Overlay] hideOverlay triggered at', new Date().toISOString());
     overlayWindow.webContents.send('overlay:close');
     setTimeout(() => {
       overlayWindow?.hide();
@@ -154,7 +168,8 @@ function hideOverlay() {
 }
 
 function toggleOverlay() {
-  if (isOverlayVisible) {
+  console.log('[Overlay] toggleOverlay triggered, currently visible:', isOverlayVisible);
+  if (overlayWindow && overlayWindow.isVisible() && isOverlayVisible) {
     hideOverlay();
   } else {
     showOverlay();
@@ -164,14 +179,34 @@ function toggleOverlay() {
 // ─── Global Shortcut ─────────────────────────────────────────────────────────
 
 function registerGlobalShortcut() {
+  globalShortcut.unregisterAll();
   const { getSetting, setSetting } = require('./database');
   let shortcut = getSetting('shortcut');
-  if (!shortcut || shortcut === 'CommandOrControl+Shift+V' || shortcut === 'Ctrl+Shift+V') {
+  if (!shortcut) {
     shortcut = 'Alt+C';
     setSetting('shortcut', 'Alt+C');
   }
-  const registered = globalShortcut.register(shortcut, toggleOverlay);
   
+  const registered = globalShortcut.register(shortcut, () => {
+    console.log(`[Shortcut] ${shortcut} triggered`);
+    toggleOverlay();
+  });
+  
+  // Register fallback shortcuts in case Alt+C is intercepted by system GPU drivers (AMD/NVIDIA)
+  try {
+    globalShortcut.register('Alt+V', () => {
+      console.log('[Shortcut] Alt+V triggered');
+      toggleOverlay();
+    });
+  } catch (e) {}
+
+  try {
+    globalShortcut.register('CommandOrControl+Shift+V', () => {
+      console.log('[Shortcut] Ctrl+Shift+V triggered');
+      toggleOverlay();
+    });
+  } catch (e) {}
+
   if (!registered) {
     console.error('Failed to register global shortcut:', shortcut);
   } else {

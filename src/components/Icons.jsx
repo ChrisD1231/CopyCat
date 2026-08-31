@@ -15,8 +15,11 @@ const props = {
 
 export const Icons = {
   Logo: (p) => (
-    <svg {...props} strokeWidth="1.5" className={p.className} style={p.style}>
-      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+    <svg {...props} strokeWidth="1.8" className={p.className} style={p.style}>
+      <path d="M8.5 7.5a2 2 0 0 0-2 2v8.5a3 3 0 0 0 3 3h7.5" />
+      <path d="M 8.5 11 L 8 4.5 L 11.5 8.5 Q 14 7.5 19.5 4.5 L 19.5 11 A 5.5 6.5 0 0 1 8.5 11 Z" />
+      <path d="M 9.2 10.2 L 9.5 7 L 11 8.5" strokeWidth="1.2" />
+      <path d="M 19.5 4.5 L 19.5 11 C 18.5 11 16.5 10 16 8.5 Z" fill="currentColor" stroke="none" />
     </svg>
   ),
   Search: (p) => (
