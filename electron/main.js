@@ -315,7 +315,9 @@ function setupIPC() {
       shortcut: getSetting('shortcut') || 'Alt+C',
       pollInterval: parseInt(getSetting('pollInterval') || '500'),
       autoDelete: getSetting('autoDelete') || 'never',
-      excludedApps: JSON.parse(getSetting('excludedApps') || '[]'),
+      excludedApps: JSON.parse(getSetting('excludedApps') || '["1Password.exe", "Bitwarden.exe", "KeePass.exe", "KeePassXC.exe", "Dashlane.exe"]'),
+      excludePasswords: getSetting('excludePasswords') !== 'false',
+      skipSensitive: getSetting('skipSensitive') !== 'false',
       captureEnabled: getSetting('captureEnabled') !== 'false',
       maxItems: parseInt(getSetting('maxItems') || '10000'),
     };
@@ -324,6 +326,9 @@ function setupIPC() {
   ipcMain.handle('save-setting', async (_, key, value) => {
     const { setSetting } = require('./database');
     setSetting(key, typeof value === 'object' ? JSON.stringify(value) : String(value));
+    if (key === 'shortcut') {
+      registerGlobalShortcut();
+    }
     return true;
   });
 

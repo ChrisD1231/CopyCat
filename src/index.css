@@ -840,6 +840,94 @@ input, select {
   transform: translateX(14px);
 }
 
+.settings-select {
+  background: #18181b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+}
+
+.settings-select:focus {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Excluded Apps Manager Panel */
+.excluded-apps-panel {
+  margin-top: 12px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.excluded-apps-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.excluded-tags-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.excluded-app-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+.chip-remove-btn {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  font-size: 11px;
+  padding: 0 2px;
+  line-height: 1;
+  transition: color 0.1s;
+}
+
+.chip-remove-btn:hover {
+  color: var(--accent-red);
+}
+
+.add-app-row {
+  display: flex;
+  gap: 8px;
+}
+
+.add-app-input {
+  flex: 1;
+  background: #121215;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  padding: 6px 12px;
+  font-size: 12px;
+  color: #ffffff;
+  font-family: var(--font-mono);
+}
+
+.add-app-input:focus {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
 /* Privacy banner */
 .privacy-banner {
   display: flex;

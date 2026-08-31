@@ -58,7 +58,7 @@ export default function App() {
       case 'recent':      return <RecentFeed />;
       case 'collections': return <Collections />;
       case 'favorites':   return <Favorites />;
-      case 'settings':    return <Settings monitorStatus={monitorStatus} setMonitorStatus={setMonitorStatus} />;
+      case 'settings':    return <Settings monitorStatus={monitorStatus} setMonitorStatus={setMonitorStatus} setActiveView={setActiveView} />;
       default:            return <RecentFeed />;
     }
   };
