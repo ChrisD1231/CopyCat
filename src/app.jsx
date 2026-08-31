@@ -44,6 +44,19 @@ export default function App() {
   useEffect(() => {
     if (api) {
       api.getMonitorStatus().then(setMonitorStatus);
+      api.getSettings().then(s => {
+        if (s && s.theme) {
+          document.documentElement.setAttribute('data-theme', s.theme);
+        }
+      });
+    } else {
+      const local = localStorage.getItem('copycat_settings');
+      if (local) {
+        try {
+          const parsed = JSON.parse(local);
+          if (parsed.theme) document.documentElement.setAttribute('data-theme', parsed.theme);
+        } catch (e) {}
+      }
     }
   }, []);
 

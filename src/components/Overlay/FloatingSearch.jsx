@@ -17,6 +17,11 @@ export default function FloatingSearch() {
   // Load recent on mount
   useEffect(() => {
     loadRecent();
+    if (api) {
+      api.getSettings().then(s => {
+        if (s && s.theme) document.documentElement.setAttribute('data-theme', s.theme);
+      });
+    }
   }, []);
 
   // Focus input when overlay opens
@@ -26,6 +31,9 @@ export default function FloatingSearch() {
       setQuery('');
       setFocusedIndex(0);
       loadRecent();
+      api.getSettings().then(s => {
+        if (s && s.theme) document.documentElement.setAttribute('data-theme', s.theme);
+      });
       setTimeout(() => inputRef.current?.focus(), 50);
     });
 

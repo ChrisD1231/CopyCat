@@ -313,6 +313,7 @@ function setupIPC() {
     const { getSetting } = require('./database');
     return {
       shortcut: getSetting('shortcut') || 'Alt+C',
+      theme: getSetting('theme') || 'zinc',
       pollInterval: parseInt(getSetting('pollInterval') || '500'),
       autoDelete: getSetting('autoDelete') || 'never',
       excludedApps: JSON.parse(getSetting('excludedApps') || '["1Password.exe", "Bitwarden.exe", "KeePass.exe", "KeePassXC.exe", "Dashlane.exe"]'),

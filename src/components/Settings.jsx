@@ -20,8 +20,68 @@ const AVAILABLE_SHORTCUTS = [
   { id: 'Alt+Space', label: 'Alt + Space' },
 ];
 
+const COMMUNITY_THEMES = [
+  {
+    id: 'zinc',
+    name: 'Zinc Stealth',
+    tag: 'Default',
+    desc: 'Clean monochromatic dark mode',
+    swatches: ['#09090b', '#18181b', '#fafafa', '#22c55e'],
+    accent: '#fafafa',
+  },
+  {
+    id: 'catppuccin',
+    name: 'Catppuccin Mocha',
+    tag: 'Community',
+    desc: 'Soothing pastel dark aesthetic',
+    swatches: ['#1e1e2e', '#181825', '#cba6f7', '#a6e3a1'],
+    accent: '#cba6f7',
+  },
+  {
+    id: 'dracula',
+    name: 'Dracula Pro',
+    tag: 'Popular',
+    desc: 'Vibrant gothic dark theme',
+    swatches: ['#282a36', '#21222c', '#bd93f9', '#50fa7b'],
+    accent: '#bd93f9',
+  },
+  {
+    id: 'tokyo-night',
+    name: 'Tokyo Night',
+    tag: 'Cyberpunk',
+    desc: 'Neon Tokyo evening palette',
+    swatches: ['#1a1b26', '#16161e', '#7aa2f7', '#bb9af7'],
+    accent: '#7aa2f7',
+  },
+  {
+    id: 'nord',
+    name: 'Nord Arctic',
+    tag: 'Clean',
+    desc: 'Arctic, north-bluish palette',
+    swatches: ['#242933', '#2e3440', '#88c0d0', '#a3be8c'],
+    accent: '#88c0d0',
+  },
+  {
+    id: 'solarized',
+    name: 'Solarized Dark',
+    tag: 'Classic',
+    desc: 'Precision balanced low-contrast',
+    swatches: ['#002b36', '#073642', '#2aa198', '#268bd2'],
+    accent: '#2aa198',
+  },
+  {
+    id: 'monokai',
+    name: 'Monokai Pro',
+    tag: 'Vibrant',
+    desc: 'Rich syntax-focused palette',
+    swatches: ['#221f22', '#2d2a2e', '#ffd866', '#ff6188'],
+    accent: '#ffd866',
+  },
+];
+
 export default function Settings({ monitorStatus, setMonitorStatus, setActiveView }) {
   const [settings, setSettings] = useState({
+    theme: 'zinc',
     captureEnabled: true,
     shortcut: 'Alt+C',
     autoDelete: 'never',
@@ -40,12 +100,19 @@ export default function Settings({ monitorStatus, setMonitorStatus, setActiveVie
       // LocalStorage fallback for browser preview
       const local = localStorage.getItem('copycat_settings');
       if (local) {
-        try { setSettings(JSON.parse(local)); } catch (e) {}
+        try { 
+          const parsed = JSON.parse(local);
+          setSettings(prev => ({ ...prev, ...parsed })); 
+          if (parsed.theme) document.documentElement.setAttribute('data-theme', parsed.theme);
+        } catch (e) {}
       }
       return;
     }
     api.getSettings().then(s => {
-      if (s) setSettings(prev => ({ ...prev, ...s }));
+      if (s) {
+        setSettings(prev => ({ ...prev, ...s }));
+        if (s.theme) document.documentElement.setAttribute('data-theme', s.theme);
+      }
     });
   }, []);
 
@@ -57,6 +124,9 @@ export default function Settings({ monitorStatus, setMonitorStatus, setActiveVie
   async function saveSetting(key, value) {
     const updated = { ...settings, [key]: value };
     setSettings(updated);
+    if (key === 'theme') {
+      document.documentElement.setAttribute('data-theme', value);
+    }
     if (api) {
       await api.saveSetting(key, value);
     } else {
@@ -64,6 +134,11 @@ export default function Settings({ monitorStatus, setMonitorStatus, setActiveVie
     }
     flashSaved();
   }
+
+  const handleSelectTheme = (themeId, themeName) => {
+    saveSetting('theme', themeId);
+    flashSaved(`Applied ${themeName} theme`);
+  };
 
   async function toggleCapture() {
     const newEnabled = !settings.captureEnabled;
@@ -135,7 +210,7 @@ export default function Settings({ monitorStatus, setMonitorStatus, setActiveVie
       <div className="content-header">
         <div>
           <h1 className="content-title">Settings</h1>
-          <div className="content-subtitle">Manage Copycat preferences and privacy</div>
+          <div className="content-subtitle">Manage Copycat preferences, themes, and security</div>
         </div>
       </div>
 
@@ -149,7 +224,45 @@ export default function Settings({ monitorStatus, setMonitorStatus, setActiveVie
             </div>
           </div>
 
-          {/* 1. Capture Section */}
+          {/* 1. Theme Engine Section */}
+          <div className="settings-section">
+            <div className="settings-section-title">Appearance & Themes</div>
+            <div className="settings-description" style={{ marginBottom: 8 }}>
+              Choose from community curated dark themes with synchronized UI tokens.
+            </div>
+
+            <div className="theme-grid">
+              {COMMUNITY_THEMES.map(t => {
+                const isActive = (settings.theme || 'zinc') === t.id;
+                return (
+                  <div
+                    key={t.id}
+                    className={`theme-card ${isActive ? 'active' : ''}`}
+                    onClick={() => handleSelectTheme(t.id, t.name)}
+                    style={{ background: t.swatches[1] }}
+                  >
+                    <div className="theme-card-header">
+                      <span className="theme-card-name" style={{ color: t.accent }}>{t.name}</span>
+                      {isActive && <span className="theme-active-tag">Active</span>}
+                    </div>
+
+                    <div className="theme-swatches">
+                      {t.swatches.map((color, idx) => (
+                        <span key={idx} className="theme-swatch-dot" style={{ background: color }} />
+                      ))}
+                    </div>
+
+                    <div className="theme-preview-canvas" style={{ background: t.swatches[0] }}>
+                      <span className="theme-canvas-dot" style={{ background: t.accent }} />
+                      <div className="theme-canvas-bar" style={{ background: `${t.accent}30` }} />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* 2. Capture Section */}
           <div className="settings-section">
             <div className="settings-section-title">Capture & Retention</div>
 
@@ -203,7 +316,7 @@ export default function Settings({ monitorStatus, setMonitorStatus, setActiveVie
             </div>
           </div>
 
-          {/* 2. Exclusions Section */}
+          {/* 3. Exclusions Section */}
           <div className="settings-section">
             <div className="settings-section-title">Exclusions & Security Shield</div>
 
@@ -302,7 +415,7 @@ export default function Settings({ monitorStatus, setMonitorStatus, setActiveVie
             )}
           </div>
 
-          {/* 3. Keyboard Shortcut Section */}
+          {/* 4. Keyboard Shortcut Section */}
           <div className="settings-section">
             <div className="settings-section-title">Global Keyboard Shortcut</div>
             <div className="settings-row">
@@ -324,7 +437,7 @@ export default function Settings({ monitorStatus, setMonitorStatus, setActiveVie
             </div>
           </div>
 
-          {/* 4. Data & Privacy Management */}
+          {/* 5. Data & Privacy Management */}
           <div className="settings-section">
             <div className="settings-section-title">Data & Privacy Management</div>
 
@@ -396,7 +509,7 @@ export default function Settings({ monitorStatus, setMonitorStatus, setActiveVie
             </div>
           </div>
 
-          {/* 5. About */}
+          {/* 6. About */}
           <div className="settings-section">
             <div className="settings-section-title">About Copycat</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
