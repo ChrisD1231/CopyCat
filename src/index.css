@@ -146,7 +146,7 @@ input, select {
   border-right: 1px solid var(--border-default);
   display: flex;
   flex-direction: column;
-  padding: 16px 8px;
+  padding: 44px 8px 16px;
   justify-content: space-between;
 }
 
@@ -242,9 +242,9 @@ input, select {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 24px;
+  padding: 42px 24px 16px;
   border-bottom: 1px solid var(--border-subtle);
-  height: 56px;
+  min-height: 78px;
   flex-shrink: 0;
   -webkit-app-region: drag;
   background: rgba(3, 3, 3, 0.4);
@@ -252,15 +252,24 @@ input, select {
 }
 
 .content-title {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
 .content-subtitle {
   font-size: 11px;
   color: var(--text-tertiary);
-  margin-top: 1px;
+  margin-top: 3px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: 130px;
+  -webkit-app-region: no-drag;
 }
 
 .content-scroll {
@@ -1923,21 +1932,14 @@ input, select {
   z-index: 999999;
 }
 
-/* Push headers down on Windows/Mac to clear native window controls */
-.sidebar {
-  padding-top: 36px !important;
-}
-
-.content-header {
-  padding-top: 36px !important;
-}
-
 /* Exclude interactive elements from drag behavior */
 .sidebar-logo,
 .sidebar-nav,
 .nav-item,
 .content-title,
+.content-subtitle,
 .search-container,
+.filter-bar,
 .landing-header,
 .landing-nav-btn {
   -webkit-app-region: no-drag;
