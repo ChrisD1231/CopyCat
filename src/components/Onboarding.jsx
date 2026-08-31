@@ -87,7 +87,7 @@ export default function Onboarding({ onComplete }) {
         <div className="landing-header-inner">
           <div className="landing-logo-wrap">
             <div className="landing-logo-box">
-              <img src="/icon.png" alt="Copycat Logo" className="landing-header-logo" />
+              <Icons.Logo style={{ width: 22, height: 22, color: '#ffffff' }} />
             </div>
             <span className="landing-header-title">Copycat</span>
             <span className="landing-version-tag">v1.0 Local</span>
@@ -500,7 +500,7 @@ export default function Onboarding({ onComplete }) {
       <footer className="landing-footer">
         <div className="landing-footer-inner">
           <div className="footer-brand">
-            <img src="/icon.png" alt="Copycat Logo" className="footer-logo" />
+            <Icons.Logo style={{ width: 18, height: 18, color: '#ffffff' }} />
             <span>Copycat</span>
           </div>
           <div className="footer-links">

@@ -412,7 +412,7 @@ export default function Settings({ monitorStatus, setMonitorStatus, setActiveVie
                   justifyContent: 'center',
                   color: 'white',
                 }}>
-                  <img src="/icon.png" alt="Copycat Logo" style={{ width: 26, height: 26, filter: 'brightness(0) invert(1)' }} />
+                  <Icons.Logo style={{ width: 22, height: 22, color: '#ffffff' }} />
                 </div>
                 <div>
                   <div style={{ fontWeight: 700, fontSize: 14, color: '#ffffff' }}>Copycat Desktop</div>
