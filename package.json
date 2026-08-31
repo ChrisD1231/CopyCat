@@ -8,6 +8,7 @@
     "dev:vite": "vite",
     "dev:electron": "wait-on http://127.0.0.1:5173 && electron .",
     "build": "vite build && electron-builder",
+    "build:web": "vite build",
     "preview": "vite preview"
   },
   "keywords": ["clipboard", "productivity", "ai"],

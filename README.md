@@ -16,6 +16,10 @@
   [![SQLite](https://img.shields.io/badge/SQLite-100%25%20Local-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
   [![Privacy](https://img.shields.io/badge/Cloud%20Telemetry-0%25-brightgreen?style=for-the-badge)](#-privacy--security)
 
+  <br />
+
+  [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FChrisD1231%2FCopyCat)
+
 </div>
 
 <br />
