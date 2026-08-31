@@ -118,8 +118,17 @@ export default function Onboarding({ onComplete }) {
           </nav>
 
           <div className="landing-nav-actions">
+            <a
+              href="https://github.com/ChrisD1231/CopyCat/releases/latest"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="landing-download-nav-btn"
+            >
+              <Icons.Download style={{ width: 13, height: 13 }} />
+              <span>Download</span>
+            </a>
             <button className="landing-nav-btn" onClick={onComplete}>
-              Open Dashboard
+              Dashboard
             </button>
           </div>
         </div>
@@ -139,15 +148,30 @@ export default function Onboarding({ onComplete }) {
         </p>
 
         <div className="landing-hero-actions">
-          <button className="landing-cta-btn large" onClick={onComplete}>
-            Start Remembering <Icons.ArrowRight style={{ width: 16, height: 16, marginLeft: 6 }} />
+          <a
+            href="https://github.com/ChrisD1231/CopyCat/releases/latest"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="landing-cta-btn large"
+          >
+            <Icons.Download style={{ width: 16, height: 16, marginRight: 4 }} />
+            Download for Windows
+          </a>
+          <button className="landing-secondary-btn large" onClick={onComplete}>
+            Live Web Preview →
           </button>
-          <div className="landing-hotkey-badge">
-            <span className="hotkey-label">Toggle Overlay:</span>
-            <span className="hotkey-keys">
-              <kbd>Alt</kbd> + <kbd>C</kbd>
-            </span>
-          </div>
+        </div>
+
+        <div className="landing-platforms-row">
+          <span className="platform-tag">
+            <Icons.Windows style={{ width: 12, height: 12, marginRight: 4 }} /> Windows 10 / 11
+          </span>
+          <span className="platform-bullet">•</span>
+          <span className="platform-tag">macOS (DMG)</span>
+          <span className="platform-bullet">•</span>
+          <span className="platform-tag">Linux (AppImage)</span>
+          <span className="platform-bullet">•</span>
+          <span className="platform-tag">v1.0.0 Free</span>
         </div>
 
         {/* Hero Interactive App Mockup */}
@@ -506,10 +530,27 @@ export default function Onboarding({ onComplete }) {
       <section className="landing-footer-cta-wrap">
         <div className="footer-cta-card">
           <h2 className="footer-cta-title">Start remembering everything today</h2>
-          <p className="footer-cta-desc">Free, open-source, and private by design.</p>
-          <button className="landing-cta-btn large" onClick={onComplete}>
-            Open Copycat Dashboard <Icons.ArrowRight style={{ width: 16, height: 16, marginLeft: 6 }} />
-          </button>
+          <p className="footer-cta-desc">Free, local-first, zero telemetry, and open-source on GitHub.</p>
+          <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <a
+              href="https://github.com/ChrisD1231/CopyCat/releases/latest"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="landing-cta-btn large"
+            >
+              <Icons.Download style={{ width: 16, height: 16, marginRight: 6 }} />
+              Download Copycat Free
+            </a>
+            <a
+              href="https://github.com/ChrisD1231/CopyCat"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="landing-secondary-btn large"
+            >
+              <Icons.Github style={{ width: 16, height: 16, marginRight: 6 }} />
+              GitHub Repository
+            </a>
+          </div>
         </div>
       </section>
 

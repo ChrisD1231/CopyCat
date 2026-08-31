@@ -150,4 +150,21 @@ export const Icons = {
       <polyline points="12 19 5 12 12 5" />
     </svg>
   ),
+  Download: (p) => (
+    <svg {...props} className={p.className} style={p.style}>
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="7 10 12 15 17 10" />
+      <line x1="12" y1="15" x2="12" y2="3" />
+    </svg>
+  ),
+  Windows: (p) => (
+    <svg {...props} className={p.className} style={p.style} viewBox="0 0 24 24" fill="currentColor" stroke="none">
+      <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4h-13.051M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.951-1.849" />
+    </svg>
+  ),
+  Github: (p) => (
+    <svg {...props} className={p.className} style={p.style}>
+      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+    </svg>
+  ),
 };
