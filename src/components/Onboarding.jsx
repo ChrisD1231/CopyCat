@@ -119,9 +119,8 @@ export default function Onboarding({ onComplete }) {
 
           <div className="landing-nav-actions">
             <a
-              href="https://github.com/ChrisD1231/CopyCat/releases/latest"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/downloads/Copycat-Windows-x64.zip"
+              download="Copycat-Windows-x64.zip"
               className="landing-download-nav-btn"
             >
               <Icons.Download style={{ width: 13, height: 13 }} />
@@ -149,9 +148,8 @@ export default function Onboarding({ onComplete }) {
 
         <div className="landing-hero-actions">
           <a
-            href="https://github.com/ChrisD1231/CopyCat/releases/latest"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/downloads/Copycat-Windows-x64.zip"
+            download="Copycat-Windows-x64.zip"
             className="landing-cta-btn large"
           >
             <Icons.Download style={{ width: 16, height: 16, marginRight: 4 }} />
@@ -533,9 +531,8 @@ export default function Onboarding({ onComplete }) {
           <p className="footer-cta-desc">Free, local-first, zero telemetry, and open-source on GitHub.</p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
             <a
-              href="https://github.com/ChrisD1231/CopyCat/releases/latest"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/downloads/Copycat-Windows-x64.zip"
+              download="Copycat-Windows-x64.zip"
               className="landing-cta-btn large"
             >
               <Icons.Download style={{ width: 16, height: 16, marginRight: 6 }} />
