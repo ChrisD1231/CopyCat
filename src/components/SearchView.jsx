@@ -70,7 +70,7 @@ export default function SearchView() {
             id="main-search-input"
             type="text"
             className="search-input"
-            placeholder='Try "boat animation", "green color", "scrolling code"...'
+            placeholder='Search anything you’ve copied (e.g. "code", "links", "emails", "notes")...'
             value={query}
             onChange={e => setQuery(e.target.value)}
             autoComplete="off"
@@ -82,8 +82,8 @@ export default function SearchView() {
         </div>
         {!query && (
           <div style={{ display: 'flex', gap: 8, marginTop: 12, flexWrap: 'wrap' }}>
-            {['scrolling code', 'color palette', 'react component', 'sql query', 'terminal script'].map(s => (
-              <button key={s} className="filter-chip" onClick={() => setQuery(s)}>
+            {['Code Snippets', 'Web Links', 'Colors', 'API Tokens', 'Notes & Text', 'Prompts'].map(s => (
+              <button key={s} className="filter-chip" onClick={() => setQuery(s.toLowerCase())}>
                 {s}
               </button>
             ))}

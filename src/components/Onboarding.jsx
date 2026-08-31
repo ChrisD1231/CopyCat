@@ -163,7 +163,7 @@ export default function Onboarding({ onComplete }) {
                 <Icons.Search style={{ width: 14, height: 14, color: 'var(--text-tertiary)' }} />
                 <input 
                   type="text" 
-                  placeholder="Search by concept (e.g. 'gsap code', 'dark color', 'prompt')..." 
+                  placeholder="Search anything you’ve copied (e.g. 'code', 'link', 'color', 'notes')..." 
                   value={demoQuery}
                   onChange={(e) => setDemoQuery(e.target.value)}
                   className="preview-input"
