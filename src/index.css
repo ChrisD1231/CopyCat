@@ -1765,6 +1765,112 @@ input, select {
   align-items: center;
 }
 
+/* ─── Animated Ambient Background System ──────────────────── */
+.landing-ambient-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1800px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Subtle Geometric Tech Dot Mesh */
+.ambient-grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 60% 50% at 50% 25%, black 20%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 25%, black 20%, transparent 85%);
+  opacity: 0.45;
+  animation: gridDrift 24s ease-in-out infinite alternate;
+}
+
+@keyframes gridDrift {
+  0% { transform: translateY(0) scale(1); opacity: 0.35; }
+  50% { transform: translateY(-8px) scale(1.02); opacity: 0.55; }
+  100% { transform: translateY(0) scale(1); opacity: 0.35; }
+}
+
+/* Ambient Floating Orbs */
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  will-change: transform, opacity;
+}
+
+.orb-top-center {
+  top: -120px;
+  left: 50%;
+  width: 650px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(99, 102, 241, 0.05) 50%, transparent 80%);
+  transform: translateX(-50%);
+  animation: floatOrbTop 14s ease-in-out infinite alternate;
+}
+
+.orb-left-glow {
+  top: 250px;
+  left: 10%;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.07) 0%, rgba(56, 189, 248, 0.03) 60%, transparent 80%);
+  animation: floatOrbLeft 18s ease-in-out infinite alternate;
+}
+
+.orb-right-glow {
+  top: 380px;
+  right: 10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.06) 0%, rgba(168, 85, 247, 0.04) 60%, transparent 80%);
+  animation: floatOrbRight 20s ease-in-out infinite alternate;
+}
+
+/* Ambient Soft Light Cone / Beam */
+.ambient-beam {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 800px;
+  height: 500px;
+  transform: translateX(-50%);
+  background: conic-gradient(from 180deg at 50% 0%, transparent 42%, rgba(255, 255, 255, 0.04) 50%, transparent 58%);
+  filter: blur(30px);
+  mask-image: radial-gradient(circle at 50% 0%, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle at 50% 0%, black 20%, transparent 70%);
+  animation: beamPulse 10s ease-in-out infinite alternate;
+}
+
+@keyframes floatOrbTop {
+  0% { transform: translateX(-50%) translateY(0) scale(1); opacity: 0.6; }
+  50% { transform: translateX(-48%) translateY(25px) scale(1.1); opacity: 0.9; }
+  100% { transform: translateX(-52%) translateY(-10px) scale(0.95); opacity: 0.7; }
+}
+
+@keyframes floatOrbLeft {
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.5; }
+  50% { transform: translateY(-35px) translateX(20px) scale(1.15); opacity: 0.8; }
+  100% { transform: translateY(20px) translateX(-15px) scale(0.9); opacity: 0.4; }
+}
+
+@keyframes floatOrbRight {
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.5; }
+  50% { transform: translateY(40px) translateX(-25px) scale(1.12); opacity: 0.85; }
+  100% { transform: translateY(-20px) translateX(15px) scale(0.95); opacity: 0.45; }
+}
+
+@keyframes beamPulse {
+  0% { opacity: 0.4; transform: translateX(-50%) scaleX(1); }
+  50% { opacity: 0.8; transform: translateX(-50%) scaleX(1.08); }
+  100% { opacity: 0.4; transform: translateX(-50%) scaleX(0.95); }
+}
+
 /* Toast Notification */
 .landing-toast {
   position: fixed;

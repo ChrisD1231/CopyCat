@@ -74,6 +74,15 @@ export default function Onboarding({ onComplete }) {
 
   return (
     <div className="landing-container">
+      {/* Animated Ambient Background */}
+      <div className="landing-ambient-bg" aria-hidden="true">
+        <div className="ambient-grid-pattern" />
+        <div className="ambient-orb orb-top-center" />
+        <div className="ambient-orb orb-left-glow" />
+        <div className="ambient-orb orb-right-glow" />
+        <div className="ambient-beam" />
+      </div>
+
       {/* Toast Notification */}
       {copiedToast && (
         <div className="landing-toast">
