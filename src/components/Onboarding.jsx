@@ -80,7 +80,15 @@ export default function Onboarding({ onComplete }) {
         <div className="ambient-orb orb-top-center" />
         <div className="ambient-orb orb-left-glow" />
         <div className="ambient-orb orb-right-glow" />
+        <div className="ambient-orb orb-bottom-glow" />
         <div className="ambient-beam" />
+        {/* Floating cyber particles */}
+        <div className="ambient-particle p-1" />
+        <div className="ambient-particle p-2" />
+        <div className="ambient-particle p-3" />
+        <div className="ambient-particle p-4" />
+        <div className="ambient-particle p-5" />
+        <div className="ambient-particle p-6" />
       </div>
 
       {/* Toast Notification */}
