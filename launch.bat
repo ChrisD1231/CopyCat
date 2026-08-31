@@ -6,12 +6,17 @@ echo ========================================================
 echo   Starting Copycat Desktop Application
 echo ========================================================
 echo.
-echo [1/2] Cleaning up previous locks...
+echo [1/3] Cleaning up previous locks...
 taskkill /F /IM electron.exe >nul 2>&1
 
-echo [2/2] Starting Copycat Desktop Window...
+echo [2/3] Verifying bundle...
+if not exist "dist\index.html" (
+    call npx vite build
+)
+
+echo [3/3] Launching Copycat...
 echo.
-call npm run dev
+call npx electron .
 if %ERRORLEVEL% NEQ 0 (
     echo.
     echo ========================================================

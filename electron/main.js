@@ -6,7 +6,7 @@ const { startClipboardMonitor, stopClipboardMonitor, pauseMonitor, resumeMonitor
 const { searchItems, getRecentItems, getCollections, getFavorites, toggleFavorite, deleteItem, clearAll, getItem, updateItemUsage } = require('./database');
 const { search } = require('./search-engine');
 
-const isDev = process.env.NODE_ENV === 'development' || !app.isPackaged;
+const isDev = process.env.NODE_ENV === 'development';
 
 let mainWindow = null;
 let overlayWindow = null;
